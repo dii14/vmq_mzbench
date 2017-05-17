@@ -17,7 +17,7 @@
     client/2,
     worker_id/2,
     fixed_client_id/4,
-    list_up_to/1]).
+    list_up_to/3]).
 
 % gen_mqtt stats callback
 -export([stats/2]).
