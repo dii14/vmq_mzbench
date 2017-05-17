@@ -16,7 +16,8 @@
     publish_to_self/5,
     client/2,
     worker_id/2,
-    fixed_client_id/4]).
+    fixed_client_id/4,
+    list_up_to/1]).
 
 % gen_mqtt stats callback
 -export([stats/2]).
@@ -209,6 +210,8 @@ fixed_client_id(State, _Meta, Name, Id) -> {[Name, "-", integer_to_list(Id)], St
 random_client_id(State, _Meta, N) ->
     {randlist(N) ++ pid_to_list(self()), State}.
 
+list_up_to(State, _Meta, N) ->
+    {lists:seq(0, N-1), State}.
 %% ------------------------------------------------
 %% Gen_MQTT Info Callbacks
 %% ------------------------------------------------
