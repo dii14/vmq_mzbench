@@ -38,7 +38,7 @@
     on_unsubscribe/2,
     on_publish/3]).
 
--record(state, {mqtt_fsm, client}).
+-record(state, {mqtt_fsm, client, host}).
 
 -behaviour(gen_emqtt).
 
