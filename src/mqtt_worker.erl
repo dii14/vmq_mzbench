@@ -157,8 +157,9 @@ code_change(_OldVsn, State, _Extra) ->
 
 connect(State, _Meta, ConnectOpts) ->
     ClientId = proplists:get_value(client, ConnectOpts),
+    Host = proplists:get_value(host, ConnectOpts, "not_set"),
     {ok, SessionPid} = gen_emqtt:start_link(?MODULE, [], [{info_fun, {fun stats/2, maps:new()}}|ConnectOpts]),
-    {nil, State#state{mqtt_fsm=SessionPid, client=ClientId}}.
+    {nil, State#state{mqtt_fsm=SessionPid, client=ClientId, host=Host}}.
 
 disconnect(#state{mqtt_fsm=SessionPid} = State, _Meta) ->
     gen_emqtt:disconnect(SessionPid),
@@ -201,6 +202,9 @@ publish_to_self(#state{client = ClientId} = State, _Meta, TopicPrefix, Payload, 
 
 client(#state{client = Client}=State, _Meta) ->
     {Client, State}.
+
+client_host(#state{host = Host}=State, _Meta) ->
+    {Host, State}.
 
 worker_id(State, Meta) ->
     ID = proplists:get_value(worker_id, Meta),
