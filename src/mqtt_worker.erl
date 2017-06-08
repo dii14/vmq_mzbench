@@ -15,6 +15,7 @@
     subscribe_to_self/4,
     publish_to_self/5,
     client/2,
+    client_host/2,
     worker_id/2,
     fixed_client_id/4,
     list_up_to/3]).
